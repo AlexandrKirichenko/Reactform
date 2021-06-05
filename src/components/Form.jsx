@@ -10,6 +10,18 @@ class Form extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
+    validateName = () => {
+        if(this.state.firstName.length < 5) {
+            alert('Your first name cant be less than 6 characters')
+        }
+    }
+
+    validateEmail = () => {
+        if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.email)) {
+            alert('email is not valid')
+        }
+    }
+
     render() {
         const {firstName, email} = this.state;
         return (
@@ -20,6 +32,7 @@ class Form extends Component {
                     placeholder='firstName'
                     value={firstName}
                     onChange={this.handleChange}
+                    onBlur={this.validateName}
                 />
                 <input
                     type='email'
@@ -27,6 +40,7 @@ class Form extends Component {
                     placeholder='email'
                     value={email}
                     onChange={this.handleChange}
+                    onBlur={this.validateEmail}
                 />
             </div>
         );
